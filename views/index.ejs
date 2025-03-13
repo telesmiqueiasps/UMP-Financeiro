@@ -1,0 +1,142 @@
+<div class="max-w-5xl mx-auto">
+  <!-- Cabeçalho -->
+  <h1 class="text-4xl font-extrabold text-indigo-900 mb-8 text-center bg-gradient-to-r from-indigo-600 to-teal-500 text-transparent bg-clip-text animate-fade-in">
+      Informações de Identificação
+  </h1>
+
+  <!-- Seção de Identificação -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="relative bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-all duration-300 border-t-2 border-indigo-500">
+          <div class="absolute -top-3 left-3 bg-indigo-500 text-white p-1 rounded-full text-sm">🏢</div>
+          <h3 class="text-base font-bold text-indigo-800 mt-3">UMP/Federação</h3>
+          <p class="text-gray-600 text-sm mt-1"><%= config ? config.ump_federacao : 'Não definido' %></p>
+      </div>
+
+      <div class="relative bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-all duration-300 border-t-2 border-teal-500">
+          <div class="absolute -top-3 left-3 bg-teal-500 text-white p-1 rounded-full text-sm">🏛️</div>
+          <h3 class="text-base font-bold text-teal-800 mt-3">Federação/Sínodo</h3>
+          <p class="text-gray-600 text-sm mt-1"><%= config ? config.federacao_sinodo : 'Não definido' %></p>
+      </div>
+
+      <div class="relative bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-all duration-300 border-t-2 border-gray-500">
+          <div class="absolute -top-3 left-3 bg-gray-500 text-white p-1 rounded-full text-sm">📅</div>
+          <h3 class="text-base font-bold text-gray-800 mt-3">Ano Vigente</h3>
+          <p class="text-gray-600 text-sm mt-1"><%= config ? config.ano_vigente : 'Não definido' %></p>
+      </div>
+
+      <div class="relative bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-all duration-300 border-t-2 border-green-500">
+          <div class="absolute -top-3 left-3 bg-green-500 text-white p-1 rounded-full text-sm">👥</div>
+          <h3 class="text-base font-bold text-green-800 mt-3">Sócios Ativos</h3>
+          <p class="text-gray-600 text-sm mt-1"><%= config ? config.socios_ativos : 'Não definido' %></p>
+      </div>
+
+      <div class="relative bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-all duration-300 border-t-2 border-green-500">
+          <div class="absolute -top-3 left-3 bg-green-500 text-white p-1 rounded-full text-sm">🤝</div>
+          <h3 class="text-base font-bold text-green-800 mt-3">Sócios Cooperadores</h3>
+          <p class="text-gray-600 text-sm mt-1"><%= config ? config.socios_cooperadores : 'Não definido' %></p>
+      </div>
+
+      <div class="relative bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-all duration-300 border-t-2 border-gray-600">
+          <div class="absolute -top-3 left-3 bg-gray-600 text-white p-1 rounded-full text-sm">💼</div>
+          <h3 class="text-base font-bold text-gray-800 mt-3">Tesoureiro Responsável</h3>
+          <p class="text-gray-600 text-sm mt-1"><%= config ? config.tesoureiro_responsavel : 'Não definido' %></p>
+      </div>
+  </div>
+
+  <!-- Seção Financeira -->
+  <h1 class="mt-12 text-4xl font-extrabold text-indigo-900 mb-6 text-center bg-gradient-to-r from-indigo-600 to-teal-500 text-transparent bg-clip-text animate-fade-in">
+      Resumo Financeiro - <%= config ? config.ano_vigente : 'N/A' %>
+  </h1>
+
+  <!-- Saldo Inicial -->
+  <div class="bg-gradient-to-r from-blue-100 to-orange-400 text-white rounded-xl p-6 shadow-lg text-center transform hover:-translate-y-1 transition-transform duration-300">
+      <h2 class="text-lg font-bold text-gray-600 flex justify-center items-center">
+          <span class="mr-1">💰</span> Saldo Inicial do Ano
+      </h2>
+      <p class="text-2xl font-extrabold text-gray-600 mt-2"><%= saldoFormatado %></p>
+  </div>
+
+  <!-- Receitas e Despesas -->
+  <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-all duration-300 border-t-2 border-green-500">
+          <h2 class="text-lg font-bold text-green-800 flex items-center">
+              <span class="mr-1">📈</span> Receitas do Ano
+          </h2>
+          <div class="mt-2 space-y-1">
+              <p class="text-gray-600 text-sm"><span class="font-semibold">Outras Receitas:</span> <%= outrasReceitas %></p>
+              <p class="text-gray-600 text-sm"><span class="font-semibold">ACI Recebida:</span> <%= aciRecebida %></p>
+              <p class="text-green-700 text-xl font-bold mt-2"><span class="font-semibold">Total:</span> <%= receitas %></p>
+          </div>
+      </div>
+
+      <div class="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-all duration-300 border-t-2 border-red-500">
+          <h2 class="text-lg font-bold text-red-800 flex items-center">
+              <span class="mr-1">📉</span> Despesas do Ano
+          </h2>
+          <div class="mt-2 space-y-1">
+              <p class="text-gray-600 text-sm"><span class="font-semibold">Outras Despesas:</span> <%= outrasDespesas %></p>
+              <p class="text-gray-600 text-sm"><span class="font-semibold">ACI Enviada:</span> <%= aciEnviada %></p>
+              <p class="text-red-700 text-xl font-bold mt-2"><span class="font-semibold">Total:</span> <%= despesas %></p>
+          </div>
+      </div>
+  </div>
+
+  <!-- Saldo Final -->
+  <div class="mt-6 bg-gradient-to-r from-blue-100 to-orange-400 text-white rounded-xl p-6 shadow-lg text-center transform hover:-translate-y-1 transition-transform duration-300">
+      <h2 class="text-lg font-bold text-gray-600 flex justify-center items-center">
+          <span class="mr-1">💰</span> Saldo Final do Ano
+      </h2>
+      <p class="text-2xl font-extrabold text-gray-600 mt-2"><%= saldoFinalFormatado %></p>
+  </div>
+
+  <!-- Modal de Sucesso e Erro -->
+  <% if (messages.success) { %>
+      <div id="success-modal" class="fixed inset-0 flex items-center justify-center z-50 bg-gray-500 bg-opacity-50">
+          <div class="bg-white p-6 rounded-lg shadow-md max-w-sm w-full">
+              <div class="flex justify-between items-center mb-4">
+                  <h2 class="text-xl font-semibold text-green-600">Sucesso!</h2>
+                  <button onclick="document.getElementById('success-modal').style.display='none'" class="text-gray-500">×</button>
+              </div>
+              <p class="text-gray-700"><%= messages.success %></p>
+              <div class="mt-4 flex justify-end">
+                  <a href="/" class="py-2 px-4 rounded-lg transition bg-green-600 text-white hover:bg-green-700">Ok</a>
+              </div>
+          </div>
+      </div>
+  <% } %>
+  <% if (messages.danger) { %>
+      <div id="danger-modal" class="fixed inset-0 flex items-center justify-center z-50 bg-gray-500 bg-opacity-50">
+          <div class="bg-white p-6 rounded-lg shadow-md max-w-sm w-full">
+              <div class="flex justify-between items-center mb-4">
+                  <h2 class="text-xl font-semibold text-red-600">Acesso negado!</h2>
+                  <button onclick="document.getElementById('danger-modal').style.display='none'" class="text-gray-500">×</button>
+              </div>
+              <p class="text-gray-700"><%= messages.danger %></p>
+              <div class="mt-4 flex justify-end">
+                  <a href="/" class="py-2 px-4 rounded-lg transition bg-red-600 text-white hover:bg-red-700">Ok</a>
+              </div>
+          </div>
+      </div>
+  <% } %>
+
+  <!-- Estilos locais -->
+  <style>
+      @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(15px); }
+          to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in {
+          animation: fadeIn 0.6s ease-out;
+      }
+  </style>
+
+  <!-- Script para mostrar os modais -->
+  <script>
+      setTimeout(function() {
+          const successModal = document.getElementById('success-modal');
+          const dangerModal = document.getElementById('danger-modal');
+          if (successModal) successModal.style.display = 'flex';
+          if (dangerModal) dangerModal.style.display = 'flex';
+      }, 200);
+  </script>
+</div>

@@ -1,0 +1,38 @@
+{
+    "name": "ump-financeiro",
+    "version": "1.0.0",
+    "description": "Sistema financeiro UMP migrado de Flask para Node.js/Express",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "author": "Miqueias Teles",
+    "license": "MIT",
+    "dependencies": {
+        "axios": "^1.8.3",
+        "bcrypt": "^5.1.1",
+        "connect-flash": "^0.1.1",
+        "currency.js": "^2.0.4",
+        "dotenv": "^16.4.7",
+        "ejs": "^3.1.9",
+        "express": "^4.18.2",
+        "express-ejs-layouts": "^2.5.1",
+        "express-session": "^1.18.1",
+        "flash": "^1.1.0",
+        "jsonwebtoken": "^9.0.2",
+        "multer": "^1.4.5-lts.1",
+        "nodemailer": "^6.10.0",
+        "passport": "^0.6.0",
+        "passport-local": "^1.0.0",
+        "pdf2image": "^1.2.3",
+        "redirect": "^0.2.0",
+        "sequelize": "^6.32.1",
+        "sqlite3": "^5.1.6",
+        "fs-extra": "^11.1.1",
+        "mysql2": "^3.6.0",
+        "@sendinblue/client": "^3.3.1"
+    },
+    "devDependencies": {
+    "nodemon": "^3.0.1"
+    }
+}

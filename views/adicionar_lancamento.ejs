@@ -1,0 +1,130 @@
+<div class="max-w-lg mx-auto mt-10 bg-white p-8 rounded-xl shadow-xl border-t-4 border-blue-600">
+    <%
+        const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+        const mesAtual = typeof mes !== 'undefined' ? mes : 1; // Valor padrão caso mes seja undefined
+        const anoAtual = typeof ano_atual !== 'undefined' ? ano_atual : new Date().getFullYear(); // Valor padrão caso ano_atual seja undefined
+    %>
+    <h1 class="text-3xl font-bold text-center text-blue-900 mb-6">
+        Adicionar Lançamento - <%= meses[mesAtual - 1] %> <%= anoAtual %>
+    </h1>
+
+    <form method="POST" action="/adicionar_lancamento/<%= mesAtual %>" enctype="multipart/form-data" class="space-y-5">
+        <!-- Data -->
+        <div>
+            <label for="data" class="block text-lg font-semibold text-gray-700">Data:</label>
+            <input type="date" name="data" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none" required>
+        </div>
+
+        <!-- Tipo -->
+        <div>
+            <label for="tipo" class="block text-lg font-semibold text-gray-700">Tipo:</label>
+            <select name="tipo" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none" required>
+                <option value="Outras Receitas">Outras Receitas</option>
+                <option value="Outras Despesas">Outras Despesas</option>
+                <option value="ACI Recebida">ACI Recebida</option>
+                <option value="ACI Enviada">ACI Enviada</option>
+            </select>
+        </div>
+
+        <!-- Descrição -->
+        <div>
+            <label for="descricao" class="block text-lg font-semibold text-gray-700">Descrição:</label>
+            <input type="text" name="descricao" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none" required>
+        </div>
+
+        <!-- Valor -->
+        <div>
+            <label for="valor" class="block text-lg font-semibold text-gray-700">Valor:</label>
+            <input type="number" step="0.01" name="valor" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none" required>
+        </div>
+
+        <!-- Comprovante -->
+        <div class="relative">
+            <label for="comprovante" class="block text-lg font-semibold text-gray-700">
+                Comprovante:
+            </label>
+            <p class="text-sm text-gray-500 mt-1 mb-2">
+                <i class="fas fa-info-circle mr-1 text-blue-500"></i>
+                O comprovante deve ser uma imagem no formato JPG, JPEG ou PNG.
+            </p>
+            <input type="file" 
+                   id="comprovante" 
+                   name="comprovante" 
+                   accept="image/jpeg,image/jpg,image/png" 
+                   class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-gray-900 transition-all duration-200">
+        </div>
+
+        <!-- Botões -->
+        <div class="flex gap-4">
+            <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-lg font-semibold shadow-md hover:bg-blue-700 transition-all">
+                Salvar
+            </button>
+            <a href="/mes/<%= mesAtual %>/<%= anoAtual %>" class="w-full text-center bg-gray-500 text-white p-3 rounded-lg font-semibold shadow-md hover:bg-gray-600 transition-all">
+                Cancelar
+            </a>
+        </div>
+    </form>
+</div>
+
+<% if (messages.success || messages.warning || messages.danger) { %>
+    <div id="message-modal" class="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50 animate-fade-in">
+        <div class="bg-white p-6 rounded-xl shadow-xl max-w-sm w-full animate-pop-in">
+            <% if (messages.success) { %>
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold text-green-700 flex items-center">
+                        <span class="mr-2">✅</span> Sucesso!
+                    </h2>
+                    <button onclick="document.getElementById('message-modal').style.display='none'" class="text-gray-500 hover:text-gray-700 text-2xl">
+                        ×
+                    </button>
+                </div>
+                <p class="text-gray-700"><%= messages.success %></p>
+                <div class="mt-6 flex justify-end">
+                    <a href="/mes/<%= mesAtual %>/<%= anoAtual %>" class="bg-gradient-to-r from-green-600 to-green-700 text-white py-2 px-4 rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-200">
+                        Ok
+                    </a>
+                </div>
+            <% } %>
+            
+            <% if (messages.warning) { %>
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold text-yellow-600 flex items-center">
+                        <span class="mr-2">⚠️</span> Aviso
+                    </h2>
+                    <button onclick="document.getElementById('message-modal').style.display='none'" class="text-gray-500 hover:text-gray-700 text-2xl">
+                        ×
+                    </button>
+                </div>
+                <p class="text-gray-700"><%= messages.warning %></p>
+                <div class="mt-6 flex justify-end">
+                    <a href="/mes/<%= mesAtual %>/<%= anoAtual %>" class="bg-gradient-to-r from-yellow-600 to-yellow-700 text-white py-2 px-4 rounded-lg hover:from-yellow-700 hover:to-yellow-800 transition-all duration-200">
+                        Ok
+                    </a>
+                </div>
+            <% } %>
+            
+            <% if (messages.danger) { %>
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold text-red-700 flex items-center">
+                        <span class="mr-2">❌</span> Erro
+                    </h2>
+                    <button onclick="document.getElementById('message-modal').style.display='none'" class="text-gray-500 hover:text-gray-700 text-2xl">
+                        ×
+                    </button>
+                </div>
+                <p class="text-gray-700"><%= messages.danger %></p>
+                <div class="mt-6 flex justify-end">
+                    <a href="/mes/<%= mesAtual %>/<%= anoAtual %>" class="bg-gradient-to-r from-red-600 to-red-700 text-white py-2 px-4 rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-200">
+                        Ok
+                    </a>
+                </div>
+            <% } %>
+        </div>
+    </div>
+
+    <script>
+        setTimeout(function() {
+            document.getElementById('message-modal').style.display = 'flex';
+        }, 200);
+    </script>
+<% } %>
